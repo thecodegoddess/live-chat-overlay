@@ -1,21 +1,3 @@
-function generateSessionID(){
-  var text = "";
-  var chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789";
-  for (var i = 0; i < 10; i++){
-    text += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return text;
-};
-
-function toggleSessionID() {
-  if (this.checked) {
-     document.querySelector("#session-id").value = generateSessionID();
-  } else {
-     document.querySelector("#session-id").value = "";
-  }
-}
-
-
 function saveOptions(e) {
   e.preventDefault();
   chrome.storage.sync.set({
@@ -34,16 +16,13 @@ function saveOptions(e) {
     highlightWords: document.querySelector("#highlight-words").value.toLowerCase().replace(/[^a-z0-9, ]/gi, '').split(",").map(e => e.trim()),
     showOnlyFirstName: document.querySelector("#firstname").checked,
     autoHideSeconds: document.querySelector("#auto-hide-seconds").value,
-    popoutURL: document.querySelector("#popout-url").value,
-    serverURL: document.querySelector("#server-url").value,
-    persistentSessionID: document.querySelector("#persistent-session-id").checked,
-    sessionID: document.querySelector("#session-id").value
+    popoutURL: document.querySelector("#popout-url").value
   });
 }
 
 function restoreOptions() {
 
-  var properties = ["color","scale","commentBottom","commentHeight","sizeOffset","authorBackgroundColor","authorAvatarBorderColor","authorColor","commentBackgroundColor","commentColor","fontFamily","showOnlyFirstName","highlightWords","popoutURL","serverURL","autoHideSeconds","authorAvatarOverlayOpacity","persistentSessionID","sessionID"];
+  var properties = ["color","scale","commentBottom","commentHeight","sizeOffset","authorBackgroundColor","authorAvatarBorderColor","authorColor","commentBackgroundColor","commentColor","fontFamily","showOnlyFirstName","highlightWords","popoutURL","autoHideSeconds","authorAvatarOverlayOpacity"];
   chrome.storage.sync.get(properties, function(result){
     document.querySelector("#color").value = result.color || "#000";
     document.querySelector("#scale").value = result.scale || "1.0";
@@ -59,14 +38,10 @@ function restoreOptions() {
     document.querySelector("#font-family").value = result.fontFamily || "Avenir Next, Helvetica, Geneva, Verdana, Arial, sans-serif";
     document.querySelector("#firstname").checked = result.showOnlyFirstName || false;
     document.querySelector("#auto-hide-seconds").value = result.autoHideSeconds || 0;
-    document.querySelector("#highlight-words").value = result.highlightWords.join(", ") || "q, question";
+    document.querySelector("#highlight-words").value = result.highlightWords.join(", ") || "question";
     document.querySelector("#popout-url").value = result.popoutURL || "https://chat.aaronpk.tv/overlay/";
-    document.querySelector("#server-url").value = result.serverURL || "https://chat.aaronpk.tv/overlay/pub";
-    document.querySelector("#persistent-session-id").checked = result.persistentSessionID || false;
-    document.querySelector("#session-id").value = result.sessionID || "";
   });
 
-  document.querySelector("#persistent-session-id").addEventListener("change", toggleSessionID);
 }
 
 document.addEventListener("DOMContentLoaded", restoreOptions);

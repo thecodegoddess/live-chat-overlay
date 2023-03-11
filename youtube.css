@@ -4,14 +4,14 @@
     --comment-color: #fff;
     --comment-bg-color: #222; /* needs to be slightly above black to not get keyed out */
     --comment-border-radius: 0px;
-    --comment-font-size: 40px;
+    --comment-font-size: 20px;
     --author-color: #222;
     --author-bg-color: #ffa500;
     --author-avatar-border-color: #ffa500;
     --author-border-radius: 0px;
     --author-avatar-border-size: 3px;
-    --author-avatar-size: 128px;
-    --author-font-size: 30px;
+    --author-avatar-size: 60px;
+    --author-font-size: 20px;
     --author-avatar-overlay-opacity: 0.1;
     /* donation/superchat specific */
     --donation-color: #5a4211;
@@ -22,6 +22,7 @@
     --donation-label-color: #fff;
     --donation-label-text: 'SUPERCHAT';
     --donation-shadow-color: #fff;
+
 
     --active-comment-bg-color: #90dd91;
     --shown-comment-bg-color: #555555;
@@ -50,7 +51,7 @@ body {
 }
 body.inline-chat yt-live-chat-app {
     margin-bottom: var(--comment-area-height);
-    height: calc(100vh - var(--comment-area-height)) !important;
+    /*height: calc(100vh - var(--comment-area-height)) !important;*/
 }
 .btn-clear {
     position: absolute;
@@ -146,10 +147,6 @@ highlight-chat.preview {
     border-radius: var(--author-border-radius);
     font-size: var(--author-font-size);
 }
-.hl-name::before {
-    content: '';
-    background: #f6cc0c;
-}
 .hl-message {
     position: absolute;
     width: var(--comment-width);
@@ -163,9 +160,6 @@ highlight-chat.preview {
 .hl-message img {
     width: 50px;
     vertical-align: middle;
-}
-.hl-message img.sticker {
-  width: 120px;
 }
 .hl-message a {
     color: white;
@@ -230,48 +224,8 @@ highlight-chat.preview {
     color: var(--donation-color);
     transform: rotate(-5deg) translateX(-50%);
 }
-
-.donation.silver {
-    background: linear-gradient(to right, #d6d6d6, #f1f1f1, #d6d6d6);
-    color: #434343;    
-}
-.donation.gold {
-    background: linear-gradient(to right, #BF953F, #FCF6BA, #d0aa57, #FBF5B7, #AA771C);
-    color: #4d3400;
-}
-.donation.platinum {
-    background:
-        linear-gradient(
-        -72deg,
-        #dedeff,
-        #ffffff 16%,
-        #dedeff 21%,
-        #ffffff 24%,
-        #555564 27%,
-        #dedeff 36%,
-        #ffffff 45%,
-        #ffffff 60%,
-        #dedeff 72%,
-        #ffffff 80%,
-        #dedeff 84%,
-        #555564);
-    color: #333;
-}
-.donation.diamond {
-    background: linear-gradient(to right, #e5f1fa, #ffffff, #dbe7ec);
-    color: #00374d;
-}
-.donation.emerald {
-    background: linear-gradient(to right, #3fbf3f, #99ed9a, #3fbf3f);
-    color: #115a14;
-}
-
-
 .membership {
     padding: 10px 10px 5px 10px;
-    font-size: 0.8em;
-}
-.membership-length {
     font-size: 0.8em;
 }
 .donation::before {
@@ -322,8 +276,8 @@ yt-live-chat-item-list-renderer {
 }
 
 yt-live-chat-text-message-renderer {
-    font-size: 24px !important;
-    line-height: 32px;
+    font-size: 20px !important;
+    line-height: 1.25 !important;
 }
 
 
@@ -378,4 +332,12 @@ yt-live-chat-viewer-engagement-message-renderer {
 
 .hidden {
   display: none;
+}
+
+.new-chatter #author-name {
+    background: rgba(44, 255, 20, 0.37) !important;
+}
+
+.bot {
+    font-size: .5em !important;
 }
